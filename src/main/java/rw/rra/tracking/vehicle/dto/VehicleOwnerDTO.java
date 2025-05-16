@@ -6,6 +6,7 @@ import lombok.Data;
 public class VehicleOwnerDTO {
     private String fullName;
     private String nationalId;
+    private String email;
     private String phone;
     private String address;
 }

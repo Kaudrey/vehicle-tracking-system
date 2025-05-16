@@ -1,5 +1,6 @@
 package rw.rra.tracking.vehicle.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.*;
 import java.time.LocalDate;
@@ -9,6 +10,7 @@ import java.util.*;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Table(name = "plate_numbers")
 public class PlateNumber {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -21,5 +23,6 @@ public class PlateNumber {
 
     @ManyToOne
     @JoinColumn(name = "owner_id")
+    @JsonBackReference
     private VehicleOwner owner;
 }

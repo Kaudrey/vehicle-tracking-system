@@ -1,5 +1,6 @@
 package rw.rra.tracking.vehicle.models;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 import java.util.*;
@@ -8,6 +9,7 @@ import java.util.*;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Table(name="vehicle_owners")
 public class VehicleOwner {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -29,6 +31,7 @@ public class VehicleOwner {
     private String address;
 
     @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL)
+    @JsonManagedReference
     private List<PlateNumber> plateNumbers = new ArrayList<>();
 }
 
