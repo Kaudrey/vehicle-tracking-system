@@ -25,4 +25,9 @@ public class PlateNumber {
     @JoinColumn(name = "owner_id")
     @JsonBackReference
     private VehicleOwner owner;
+
+    // PlateNumber.java
+    @Column(nullable = false, name="in_use")
+    private boolean inUse = false; // true when assigned, false when released
+
 }

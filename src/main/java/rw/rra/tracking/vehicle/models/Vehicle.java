@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDate;
+import java.util.*;
 
 @Entity
 @Data
@@ -15,9 +16,9 @@ public class Vehicle {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    private String id;
+    private UUID id;
 
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String chassisNumber;
 
     @Column(nullable = false)
@@ -33,10 +34,15 @@ public class Vehicle {
     private String modelName;
 
     @ManyToOne
-    private VehicleOwner owner;
+    @JoinColumn(name = "current_owner_id")
+    private VehicleOwner currentOwner;
 
     @ManyToOne
+    @JoinColumn(name = "plate_number_id")
     private PlateNumber plateNumber;
+
+    @OneToMany(mappedBy = "vehicle", cascade = CascadeType.ALL)
+    private List<VehicleTransfer> transfers;
 
     private LocalDate registrationDate;
 }

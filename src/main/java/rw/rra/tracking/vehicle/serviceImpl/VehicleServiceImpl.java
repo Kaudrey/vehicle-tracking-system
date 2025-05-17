@@ -30,19 +30,26 @@ public class VehicleServiceImpl implements VehicleService {
         PlateNumber plate = plateNumberRepo.findById(dto.getPlateNumberId())
                 .orElseThrow(() -> new RuntimeException("Plate number not found"));
 
+        // Set inUse to true because the plate is now assigned to a vehicle
+        if (!plate.isInUse()) {
+            plate.setInUse(true);
+            plateNumberRepo.save(plate);
+        }
+
         Vehicle vehicle = Vehicle.builder()
                 .chassisNumber(dto.getChassisNumber())
                 .manufactureCompany(dto.getManufactureCompany())
                 .manufactureYear(dto.getManufactureYear())
                 .price(dto.getPrice())
                 .modelName(dto.getModelName())
-                .owner(owner)
+                .currentOwner(owner)
                 .plateNumber(plate)
                 .registrationDate(dto.getRegistrationDate())
                 .build();
 
         return vehicleRepo.save(vehicle);
     }
+
 
     @Override
     public List<Vehicle> getAllVehicles() {
