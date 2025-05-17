@@ -17,7 +17,7 @@ import java.util.List;
 public class VehicleHistoryController {
     private final VehicleTransferRepo transferRepo;
 
-    @GetMapping("/chassis/{chassisNumber}")
+    @GetMapping("/{chassisNumber}")
     public ResponseEntity<List<VehicleTransfer>> getHistoryByChassis(@PathVariable String chassisNumber) {
         return ResponseEntity.ok(transferRepo.findByVehicle_ChassisNumber(chassisNumber));
     }

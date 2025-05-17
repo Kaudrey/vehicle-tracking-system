@@ -1,5 +1,6 @@
 package rw.rra.tracking.vehicle.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
@@ -17,6 +18,7 @@ public class VehicleTransfer {
     private UUID id;
 
     @ManyToOne
+    @JsonBackReference
     private Vehicle vehicle;
 
     @ManyToOne
@@ -24,6 +26,7 @@ public class VehicleTransfer {
 
     @ManyToOne
     private VehicleOwner toOwner;
+
 
     private Long amount;
 

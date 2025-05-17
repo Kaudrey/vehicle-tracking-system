@@ -1,6 +1,7 @@
 package rw.rra.tracking.vehicle.models;
 
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -42,6 +43,7 @@ public class Vehicle {
     private PlateNumber plateNumber;
 
     @OneToMany(mappedBy = "vehicle", cascade = CascadeType.ALL)
+    @JsonManagedReference
     private List<VehicleTransfer> transfers;
 
     private LocalDate registrationDate;
