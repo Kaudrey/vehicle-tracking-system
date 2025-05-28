@@ -1,5 +1,7 @@
 package rw.rra.tracking.vehicle.controllers;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -17,6 +19,7 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
+@SecurityRequirement(name = "")
 @RequestMapping("/api/auth")
 @RestController
 public class AuthController {
@@ -25,7 +28,7 @@ public class AuthController {
     AuthController(UserService userService) {
         this.userService = userService;
     }
-
+    @Operation(summary = "Register user", security = @SecurityRequirement(name = ""))
     @PostMapping("/register")
     public ResponseEntity<?> register(@RequestBody RegisterDTO registerDTO) {
         try{
@@ -37,7 +40,7 @@ public class AuthController {
         } catch (RuntimeException e) {
             return ResponseEntity.badRequest().body(e.getMessage());        }
     }
-
+    @Operation(summary = "Login user", security = @SecurityRequirement(name = ""))
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody LoginDTO loginDTO) {
 

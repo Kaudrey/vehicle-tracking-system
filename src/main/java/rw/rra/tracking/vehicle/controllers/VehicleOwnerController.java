@@ -1,5 +1,6 @@
 package rw.rra.tracking.vehicle.controllers;
 
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -11,6 +12,7 @@ import rw.rra.tracking.vehicle.services.VehicleOwnerService;
 import java.util.List;
 
 @PreAuthorize("hasRole('ROLE_ADMIN')")
+@SecurityRequirement(name = "bearerAuth")
 @RestController
 @RequestMapping("/api/owners")
 @RequiredArgsConstructor
